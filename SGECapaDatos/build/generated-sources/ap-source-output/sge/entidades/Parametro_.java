@@ -1,0 +1,19 @@
+package sge.entidades;
+
+import javax.annotation.Generated;
+import javax.persistence.metamodel.ListAttribute;
+import javax.persistence.metamodel.SingularAttribute;
+import javax.persistence.metamodel.StaticMetamodel;
+import sge.entidades.DetalleParametro;
+
+@Generated(value="EclipseLink-2.3.0.v20110604-r9504", date="2012-09-04T12:15:10")
+@StaticMetamodel(Parametro.class)
+public class Parametro_ { 
+
+    public static volatile SingularAttribute<Parametro, Long> id;
+    public static volatile SingularAttribute<Parametro, Boolean> habilitado;
+    public static volatile SingularAttribute<Parametro, String> codKey;
+    public static volatile SingularAttribute<Parametro, String> descripcion;
+    public static volatile ListAttribute<Parametro, DetalleParametro> detalle;
+
+}

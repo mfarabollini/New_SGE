@@ -7,7 +7,7 @@ import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 import sge.entidades.Envio;
 
-@Generated(value="EclipseLink-2.3.0.v20110604-r9504", date="2012-09-04T12:15:10")
+@Generated(value="EclipseLink-2.3.0.v20110604-r9504", date="2012-09-17T20:23:30")
 @StaticMetamodel(MedioEnvio.class)
 public class MedioEnvio_ { 
 

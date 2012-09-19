@@ -58,12 +58,10 @@ public abstract class DaoImp<K, E> implements IDao<K, E>  {
 
     @Override
     public void remove(E entity) throws ConectividadException { 
-        //entityManager.getTransaction().begin();
-        try {
-            entityManager.merge(entity);
+        entityManager.getTransaction().begin();
+        try {   
             entityManager.remove(entity); 
-            entityManager.flush();
-            //entityManager.getTransaction().commit();
+            entityManager.getTransaction().commit();
             
         } catch (Exception e) {
             entityManager.getTransaction().rollback();

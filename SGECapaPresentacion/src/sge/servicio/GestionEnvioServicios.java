@@ -283,13 +283,12 @@ public class  GestionEnvioServicios {
     }
     public static boolean eliminarLocalidad(Localidad aLocalidad) throws ConectividadException{        
         boolean resultado = false;
+        Localidad aLoc = null;
         ILocalidadDAO localidadDAO = new LocalidadDAO();
-      
-        /*Localidad localidadDAO = localidadDAO.buscarPorCuit(aMedio.getCuit());
-        if(aMedioLoc==null){*/
-        localidadDAO.remove(aLocalidad);
+        aLoc = localidadDAO.buscarLocalidadPorCodigo(aLocalidad.getId());
+        
+        localidadDAO.remove(aLoc);
         resultado = true;
-        //}
         return resultado;
     }
 }

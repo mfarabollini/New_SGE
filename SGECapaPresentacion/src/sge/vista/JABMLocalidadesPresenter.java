@@ -6,13 +6,10 @@ package sge.vista;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import sge.entidades.Localidad;
-import sge.entidades.MedioEnvio;
 import sge.entidades.Provincia;
 import sge.exception.ConectividadException;
 import sge.servicio.GestionEnvioServicios;
@@ -127,6 +124,7 @@ public class JABMLocalidadesPresenter {
         public void stateChanged(ChangeEvent ce) { 
             Provincia aProvincia=null;
             List<Localidad> localidadList=null;
+            Localidad aLocal = null;
 
             try {
                 provinciaList = GestionEnvioServicios.buscarProvincia();
@@ -143,7 +141,16 @@ public class JABMLocalidadesPresenter {
                 Localidad localidad = it.next();
                 vista.getCboLocalidad().addItem(localidad.getNombre());
         }
-        }       
+        aLocal = localidadList.get(vista.getCboLocalidad().getSelectedIndex());
+        
+        if (vista.getModo()==2||vista.getModo()==3){
+            
+            vista.getTxtCodPostal().setEditable(true);
+            vista.getTxtCodPostal().setText(aLocal.getCodigoPostal());
+            vista.getTxtDscLocalidad().setEditable(true);  
+            vista.getTxtDscLocalidad().setText(aLocal.getNombre());
+        }  
+        }     
      }
     
         class BuscarLocalidadHandler  implements ChangeListener{
@@ -152,6 +159,7 @@ public class JABMLocalidadesPresenter {
             public void stateChanged(ChangeEvent ce) { 
                 List<Localidad> localidadList=null;
                 Provincia aProvincia = null;
+                Localidad aLocal = null;
 
                 vista.getCboLocalidad().removeAllItems();
 
@@ -162,7 +170,15 @@ public class JABMLocalidadesPresenter {
                     Localidad localidad = it.next();
                     vista.getCboLocalidad().addItem(localidad.getNombre());
                 }
-            }       
+                aLocal = localidadList.get(vista.getCboLocalidad().getSelectedIndex());
+                
+                if (vista.getModo()==2||vista.getModo()==3){
+                    vista.getTxtCodPostal().setEditable(true);
+                    vista.getTxtCodPostal().setText(aLocal.getCodigoPostal());
+                    vista.getTxtDscLocalidad().setEditable(true);  
+                    vista.getTxtDscLocalidad().setText(aLocal.getNombre());
+                }   
+            }
         }
     
      private void notificarException(Exception ex){

@@ -68,6 +68,7 @@ public class JMainViewer extends javax.swing.JFrame {
         subMnuBajaTra = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jAltaLoc = new javax.swing.JMenuItem();
+        jModifLoc = new javax.swing.JMenuItem();
         jBajaLoc = new javax.swing.JMenuItem();
         mnuReportes = new javax.swing.JMenu();
         subMnuLanzarRpt = new javax.swing.JMenuItem();
@@ -296,6 +297,14 @@ public class JMainViewer extends javax.swing.JFrame {
         });
         jMenu1.add(jAltaLoc);
 
+        jModifLoc.setText("Modificar Localidad");
+        jModifLoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jModifLocActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jModifLoc);
+
         jBajaLoc.setText("Baja Localidad");
         jBajaLoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -435,6 +444,11 @@ public class JMainViewer extends javax.swing.JFrame {
         this.presenter.getBajaLocalidad().stateChanged(new ChangeEvent(this));
     }//GEN-LAST:event_jBajaLocActionPerformed
 
+    private void jModifLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jModifLocActionPerformed
+        // TODO add your handling code here:
+        this.presenter.getModifLocalidad().stateChanged(new ChangeEvent(this));
+    }//GEN-LAST:event_jModifLocActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -480,6 +494,7 @@ public class JMainViewer extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jModifLoc;
     private javax.swing.JButton lanRep;
     private javax.swing.JMenu mnuArchivo;
     private javax.swing.JMenu mnuCliente;

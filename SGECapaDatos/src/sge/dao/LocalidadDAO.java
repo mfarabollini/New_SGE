@@ -9,6 +9,7 @@ import javax.persistence.Query;
 import org.eclipse.persistence.config.HintValues;
 //import oracle.toplink.essentials.config.HintValues;
 import org.eclipse.persistence.config.QueryHints;
+import sge.entidades.Envio;
 import sge.entidades.Localidad;
 import sge.exception.ConectividadException;
 
@@ -21,5 +22,9 @@ public class LocalidadDAO extends DaoImp<Integer, Localidad> implements ILocalid
     public LocalidadDAO() throws ConectividadException {  
     }
     
+    @Override
+    public Localidad buscarLocalidadPorCodigo(Integer idLocalidad) {
+       return findById(idLocalidad);
+    }   
 
 }

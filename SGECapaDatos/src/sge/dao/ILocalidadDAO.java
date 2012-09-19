@@ -13,8 +13,6 @@ import sge.entidades.Localidad;
  * @author Propietario
  */
 public interface ILocalidadDAO extends  IDao<Integer, Localidad> {
-    /*Cliente buscarPorCodigo(Integer codigo,boolean habilitado);    
-    List<Cliente> buscarPorRazonSocial(String rsocial,boolean habilitado);
-    Boolean actualizarCliente(Cliente aCliente); //Marcos
-    Cliente buscarPorCuit(String cuit);*/
+    Localidad buscarLocalidadPorCodigo(Integer codigo);    
+
 }

@@ -47,6 +47,15 @@ public class JABMTransporteViewer extends javax.swing.JInternalFrame {
             txtRazonSocial.setEditable(false);
             cboTipo.setEnabled(false);
             txtTel.setEditable(false); 
+        }else if (modo == 4) {
+            this.setTitle("Visualizar Transportista");
+            btnGuardar.setVisible(false);
+            txtId.setEditable(false);
+            txtDir.setEditable(false);
+            txtCuit.setEditable(false);
+            txtRazonSocial.setEditable(false);
+            cboTipo.setEnabled(false);
+            txtTel.setEditable(false); 
         }
                 //Redimensiona la ventana
         pack();

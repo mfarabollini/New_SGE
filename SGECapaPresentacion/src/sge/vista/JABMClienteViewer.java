@@ -51,7 +51,20 @@ public class JABMClienteViewer extends javax.swing.JInternalFrame {
             txtTel.setEditable(false);
             txtTel2.setEditable(false);
             txtMail.setEditable(false);
+        }else if (modo == 4) {
+            this.setTitle("Visualizar Cliente");
+            btnGuardar.setVisible(false);
+            txtId.setEditable(false);
+            txtDir.setEditable(false);
+            txtCuit.setEditable(false);
+            txtRazonSocial.setEditable(false);
+            cboLocalidad.setEnabled(false);
+            cboProvincia.setEnabled(false);
+            txtTel.setEditable(false);
+            txtTel2.setEditable(false);
+            txtMail.setEditable(false);
         }
+         
         //Redimensiona la ventana
         pack();
         

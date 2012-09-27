@@ -9,7 +9,7 @@ import sge.exception.ConectividadException;
 
 /**
  *
- * @author mboni
+ * @author mboni vv
  */
 public interface IDao<K, E> {
     public void persist(E entity) throws ConectividadException;

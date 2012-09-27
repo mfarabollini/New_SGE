@@ -62,10 +62,12 @@ public class JMainViewer extends javax.swing.JFrame {
         subMnuAlta = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         subMnuBaja = new javax.swing.JMenuItem();
+        subMnuVerCli = new javax.swing.JMenuItem();
         mnuTransporte = new javax.swing.JMenu();
         subMnuAltaT = new javax.swing.JMenuItem();
         subMnuModifT = new javax.swing.JMenuItem();
         subMnuBajaTra = new javax.swing.JMenuItem();
+        subMnuVerTra = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jAltaLoc = new javax.swing.JMenuItem();
         jModifLoc = new javax.swing.JMenuItem();
@@ -252,6 +254,14 @@ public class JMainViewer extends javax.swing.JFrame {
         });
         mnuCliente.add(subMnuBaja);
 
+        subMnuVerCli.setText("Ver Cliente");
+        subMnuVerCli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                subMnuVerCliActionPerformed(evt);
+            }
+        });
+        mnuCliente.add(subMnuVerCli);
+
         jMenuBar1.add(mnuCliente);
 
         mnuTransporte.setText("Transporte");
@@ -283,6 +293,14 @@ public class JMainViewer extends javax.swing.JFrame {
             }
         });
         mnuTransporte.add(subMnuBajaTra);
+
+        subMnuVerTra.setText("Ver Transporte");
+        subMnuVerTra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                subMnuVerTraActionPerformed(evt);
+            }
+        });
+        mnuTransporte.add(subMnuVerTra);
 
         jMenuBar1.add(mnuTransporte);
 
@@ -449,6 +467,16 @@ public class JMainViewer extends javax.swing.JFrame {
         this.presenter.getModifLocalidad().stateChanged(new ChangeEvent(this));
     }//GEN-LAST:event_jModifLocActionPerformed
 
+    private void subMnuVerTraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMnuVerTraActionPerformed
+        // TODO add your handling code here:
+        this.presenter.getVerTransporteHandler().stateChanged(new ChangeEvent(this));
+    }//GEN-LAST:event_subMnuVerTraActionPerformed
+
+    private void subMnuVerCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMnuVerCliActionPerformed
+        // TODO add your handling code here:
+        this.presenter.getVerClienteHandler().stateChanged(new ChangeEvent(this));
+    }//GEN-LAST:event_subMnuVerCliActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -513,6 +541,8 @@ public class JMainViewer extends javax.swing.JFrame {
     private javax.swing.JMenuItem subMnuModifT;
     private javax.swing.JMenuItem subMnuRegistroSalida;
     private javax.swing.JMenuItem subMnuSalir;
+    private javax.swing.JMenuItem subMnuVerCli;
+    private javax.swing.JMenuItem subMnuVerTra;
     // End of variables declaration//GEN-END:variables
 
     /**

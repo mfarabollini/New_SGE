@@ -27,9 +27,11 @@ public class JMainPresenter {
     private ConfirmacionEnvioHandler confirmacionEnvioHandler = new ConfirmacionEnvioHandler();
     private BajaClienteHandler bajaClienteHandler = new BajaClienteHandler();
     private ModifClienteHandler modifClienteHandler = new ModifClienteHandler();
+    private VerClienteHandler verClienteHandler = new VerClienteHandler();    
     private AltaTransporteHandler altaTransporteHandler = new AltaTransporteHandler();
     private BajaTransporteHandler bajaTransporteHandler = new BajaTransporteHandler();
     private ModifTransporteHandler modifTransporteHandler = new ModifTransporteHandler();
+    private VerTransporteHandler verTransporteHandler = new VerTransporteHandler();
     private LanzarReportesHandler lanzarReportesHandler = new LanzarReportesHandler();
     private AltaLocalidadHandler altaLocalidad = new AltaLocalidadHandler();
     private BajaLocalidadHandler bajaLocalidad = new BajaLocalidadHandler();
@@ -86,6 +88,10 @@ public class JMainPresenter {
         return modifClienteHandler;
     }
 
+    public VerClienteHandler getVerClienteHandler() {
+        return verClienteHandler;
+    }
+
     public AltaTransporteHandler getAltaTransporteHandler() {
         return altaTransporteHandler;
     }
@@ -97,6 +103,11 @@ public class JMainPresenter {
     public ModifTransporteHandler getModifTransporteHandler() {
         return modifTransporteHandler;
     }
+
+    public VerTransporteHandler getVerTransporteHandler() {
+        return verTransporteHandler;
+    }
+    
 
     /**
      * @return the lanzarReportesHandler
@@ -199,8 +210,18 @@ public class JMainPresenter {
             vista.getPanelEscritorio().add(form);
             form.setVisible(true);
         }
-         
-        
+     }
+     class VerClienteHandler  implements ChangeListener{
+        @Override
+        public void stateChanged(ChangeEvent ce) {
+            if(ventanaAbierta("ABMCLI4")){
+                return;
+            }
+            JABMClienteViewer form = new JABMClienteViewer(4);
+            form.setName(form.getName()+"4");
+            vista.getPanelEscritorio().add(form);
+            form.setVisible(true);
+        }
      }  
      class AltaTransporteHandler  implements ChangeListener{
         @Override
@@ -241,6 +262,19 @@ public class JMainPresenter {
         }
          
         
+     }  
+     
+      class VerTransporteHandler  implements ChangeListener{
+        @Override
+        public void stateChanged(ChangeEvent ce) {
+            if(ventanaAbierta("ABMTRA4")){
+                return;
+            }
+            JABMTransporteViewer form = new JABMTransporteViewer(4);
+            form.setName(form.getName()+"4");
+            vista.getPanelEscritorio().add(form);
+            form.setVisible(true);
+        }
      }  
      
      class AltaLocalidadHandler  implements ChangeListener{

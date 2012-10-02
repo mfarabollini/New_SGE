@@ -70,8 +70,6 @@ public class JMainViewer extends javax.swing.JFrame {
         subMnuVerTra = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jAltaLoc = new javax.swing.JMenuItem();
-        jModifLoc = new javax.swing.JMenuItem();
-        jBajaLoc = new javax.swing.JMenuItem();
         mnuReportes = new javax.swing.JMenu();
         subMnuLanzarRpt = new javax.swing.JMenuItem();
 
@@ -307,29 +305,13 @@ public class JMainViewer extends javax.swing.JFrame {
         jMenu1.setText("Localidades");
         jMenu1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
-        jAltaLoc.setText("Alta Localidad");
+        jAltaLoc.setText("Nueva Localidad");
         jAltaLoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jAltaLocActionPerformed(evt);
             }
         });
         jMenu1.add(jAltaLoc);
-
-        jModifLoc.setText("Modificar Localidad");
-        jModifLoc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jModifLocActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jModifLoc);
-
-        jBajaLoc.setText("Baja Localidad");
-        jBajaLoc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBajaLocActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jBajaLoc);
 
         jMenuBar1.add(jMenu1);
 
@@ -452,21 +434,6 @@ public class JMainViewer extends javax.swing.JFrame {
         subMnuImprimirEtiquetasActionPerformed(evt);
     }//GEN-LAST:event_impEtiqActionPerformed
 
-    private void jAltaLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAltaLocActionPerformed
-        // TODO add your handling code here:
-        this.presenter.getAltaLocalidad().stateChanged(new ChangeEvent(this));
-    }//GEN-LAST:event_jAltaLocActionPerformed
-
-    private void jBajaLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBajaLocActionPerformed
-        // TODO add your handling code here:
-        this.presenter.getBajaLocalidad().stateChanged(new ChangeEvent(this));
-    }//GEN-LAST:event_jBajaLocActionPerformed
-
-    private void jModifLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jModifLocActionPerformed
-        // TODO add your handling code here:
-        this.presenter.getModifLocalidad().stateChanged(new ChangeEvent(this));
-    }//GEN-LAST:event_jModifLocActionPerformed
-
     private void subMnuVerTraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMnuVerTraActionPerformed
         // TODO add your handling code here:
         this.presenter.getVerTransporteHandler().stateChanged(new ChangeEvent(this));
@@ -476,6 +443,11 @@ public class JMainViewer extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.presenter.getVerClienteHandler().stateChanged(new ChangeEvent(this));
     }//GEN-LAST:event_subMnuVerCliActionPerformed
+
+    private void jAltaLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAltaLocActionPerformed
+        // TODO add your handling code here:
+        this.presenter.getAltaLocalidad().stateChanged(new ChangeEvent(this));
+    }//GEN-LAST:event_jAltaLocActionPerformed
 
     /**
      * @param args the command line arguments
@@ -517,12 +489,10 @@ public class JMainViewer extends javax.swing.JFrame {
     private javax.swing.JButton generarEnvio;
     private javax.swing.JButton impEtiq;
     private javax.swing.JMenuItem jAltaLoc;
-    private javax.swing.JMenuItem jBajaLoc;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jModifLoc;
     private javax.swing.JButton lanRep;
     private javax.swing.JMenu mnuArchivo;
     private javax.swing.JMenu mnuCliente;

@@ -34,19 +34,9 @@ public class JMainPresenter {
     private VerTransporteHandler verTransporteHandler = new VerTransporteHandler();
     private LanzarReportesHandler lanzarReportesHandler = new LanzarReportesHandler();
     private AltaLocalidadHandler altaLocalidad = new AltaLocalidadHandler();
-    private BajaLocalidadHandler bajaLocalidad = new BajaLocalidadHandler();
-    private ModifLocalidadHandler modifLocalidad = new ModifLocalidadHandler();
-
-    public ModifLocalidadHandler getModifLocalidad() {
-        return modifLocalidad;
-    }
 
     public AltaLocalidadHandler getAltaLocalidad() {
         return altaLocalidad;
-    }
-
-    public BajaLocalidadHandler getBajaLocalidad() {
-        return bajaLocalidad;
     }
     
     public ConfirmacionEnvioHandler getConfirmacionEnvioHandler() {
@@ -285,31 +275,6 @@ public class JMainPresenter {
             }
             JABMLocalidadesViewer form = new JABMLocalidadesViewer(1);
             form.setName(form.getName()+"1");
-            vista.getPanelEscritorio().add(form);
-            form.setVisible(true);
-        }
-     }
-     
-     class BajaLocalidadHandler  implements ChangeListener{
-        @Override
-        public void stateChanged(ChangeEvent ce) {
-            if(ventanaAbierta("ABMLOC3")){
-                return;
-            }
-            JABMLocalidadesViewer form = new JABMLocalidadesViewer(3);
-            form.setName(form.getName()+"3");
-            vista.getPanelEscritorio().add(form);
-            form.setVisible(true);
-        }
-     }
-     class ModifLocalidadHandler  implements ChangeListener{
-        @Override
-        public void stateChanged(ChangeEvent ce) {
-            if(ventanaAbierta("ABMLOC2")){
-                return;
-            }
-            JABMLocalidadesViewer form = new JABMLocalidadesViewer(2);
-            form.setName(form.getName()+"2");
             vista.getPanelEscritorio().add(form);
             form.setVisible(true);
         }

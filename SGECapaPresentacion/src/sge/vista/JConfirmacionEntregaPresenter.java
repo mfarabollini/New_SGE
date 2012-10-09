@@ -90,7 +90,7 @@ public class JConfirmacionEntregaPresenter {
         public void stateChanged(ChangeEvent e) {
 
             Integer codigoCli = Integer.valueOf(vista.getTxtCodCliente().getText().trim());
-            JMuestraEnviosViewer dialog = new JMuestraEnviosViewer(new javax.swing.JFrame(), true, codigoCli);
+            JMuestraEnviosViewer dialog = new JMuestraEnviosViewer(new javax.swing.JFrame(), true, codigoCli, "");
             
             if (dialog.getFind()){
                 aEnvio = dialog.showDialog();

@@ -7,12 +7,15 @@ package sge.dao;
 import java.util.List;
 import sge.entidades.Cliente;
 import sge.entidades.Localidad;
+import sge.entidades.Provincia;
 
 /**
  *
  * @author Propietario
  */
 public interface ILocalidadDAO extends  IDao<Integer, Localidad> {
-    Localidad buscarLocalidadPorCodigo(Integer codigo);    
+    Localidad buscarLocalidadPorCodigo(Integer codigo);   
+    Boolean actualizarLocalidad(Localidad aLocalidad);
+ 
 
 }

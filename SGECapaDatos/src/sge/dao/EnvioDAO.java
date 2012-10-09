@@ -15,6 +15,7 @@ import org.eclipse.persistence.config.QueryHints;
 import sge.entidades.Cliente;
 import sge.entidades.Envio;
 import sge.entidades.LineaEnvio;
+import sge.entidades.MedioEnvio;
 import sge.exception.ConectividadException;
 
 
@@ -73,6 +74,22 @@ public class EnvioDAO extends DaoImp<Integer, Envio> implements IEnvioDAO  {
 
         return (List<Envio>) q.getResultList();
     }
+    
+    @Override
+    public List<Envio> buscarEnviosNoConfirmados(Cliente aCliente) {
+        List<Envio> envioList = null;
+        Query q =null;
+        
+        q = entityManager.createQuery(            
+       "SELECT e FROM " + entityClass.getSimpleName()  +
+                 " e JOIN e.lineaEnvioList l "
+                 + " WHERE l.fechaEntrega is null and l.cliente =:cliente " );
+        q.setParameter("cliente",aCliente );  
+        q.setHint(QueryHints.REFRESH, HintValues.TRUE);
+
+        return (List<Envio>) q.getResultList();
+    }
+        
     @Override
     public List<Envio> buscarEnvioPorFecha(Date fecha) {
         List<Envio> envioList = null;
@@ -250,6 +267,50 @@ public class EnvioDAO extends DaoImp<Integer, Envio> implements IEnvioDAO  {
         return aEnvio;
     }
     
+   @Override
+    public Boolean actualizarEnvio(Envio aEnvio) {
+        
+        Envio aEnvioLocal = null;
+        MedioEnvio MedioLocal = null;
+        LineaEnvio lineaEnvio= null;
+        LineaEnvio lineaEnvioLoc = null;        
+        
+        entityManager.getTransaction().begin();
+        try {
+
+           aEnvioLocal = entityManager.find(Envio.class, aEnvio.getIdenvio());
+           aEnvioLocal.setFechaCreacion(aEnvio.getFechaCreacion());
+           aEnvioLocal.setFechaSalida(aEnvio.getFechaSalida());
+           
+           MedioLocal = aEnvio.getIdmedio();
+           entityManager.merge(MedioLocal);
+           aEnvioLocal.setIdmedio(MedioLocal);
+           
+           List<LineaEnvio> lineas =aEnvio.getLineaEnvioList();
+           List<LineaEnvio> lineasLoc = aEnvioLocal.getLineaEnvioList();
+           
+           for (int pos=0; pos< lineas.size();pos++) {
+                lineaEnvio = lineas.get(pos);
+            
+                lineaEnvioLoc = lineasLoc.get(pos);
+                entityManager.merge(lineaEnvioLoc);                    
+                lineaEnvioLoc.setNroFactura(lineaEnvio.getNroFactura());
+                lineaEnvioLoc.setCantBultos(lineaEnvio.getCantBultos());
+           }
+
+           entityManager.flush();
+           entityManager.getTransaction().commit();
+           return true;
+      } catch (Exception e) {
+           e.printStackTrace();
+           entityManager.getTransaction().rollback();
+           return false;
+       } finally {
+           entityManager.close();
+           
+       }    
+    
+}
 }
 
 

@@ -55,6 +55,7 @@ public class JMainViewer extends javax.swing.JFrame {
         subMnuSalir = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         subMnuGenerarEnvío = new javax.swing.JMenuItem();
+        jModifEnvio = new javax.swing.JMenuItem();
         subMnuImprimirEtiquetas = new javax.swing.JMenuItem();
         subMnuRegistroSalida = new javax.swing.JMenuItem();
         subMnuConfirmacionEtiquetas = new javax.swing.JMenuItem();
@@ -70,6 +71,7 @@ public class JMainViewer extends javax.swing.JFrame {
         subMnuVerTra = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jAltaLoc = new javax.swing.JMenuItem();
+        jBajaLoc = new javax.swing.JMenuItem();
         mnuReportes = new javax.swing.JMenu();
         subMnuLanzarRpt = new javax.swing.JMenuItem();
 
@@ -189,6 +191,16 @@ public class JMainViewer extends javax.swing.JFrame {
             }
         });
         jMenu3.add(subMnuGenerarEnvío);
+
+        jModifEnvio.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.ALT_MASK));
+        jModifEnvio.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jModifEnvio.setText("Modificar Envío");
+        jModifEnvio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jModifEnvioActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jModifEnvio);
 
         subMnuImprimirEtiquetas.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.ALT_MASK));
         subMnuImprimirEtiquetas.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -312,6 +324,14 @@ public class JMainViewer extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jAltaLoc);
+
+        jBajaLoc.setText("Borrar Localidad");
+        jBajaLoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBajaLocActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jBajaLoc);
 
         jMenuBar1.add(jMenu1);
 
@@ -449,6 +469,16 @@ public class JMainViewer extends javax.swing.JFrame {
         this.presenter.getAltaLocalidad().stateChanged(new ChangeEvent(this));
     }//GEN-LAST:event_jAltaLocActionPerformed
 
+    private void jModifEnvioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jModifEnvioActionPerformed
+        // TODO add your handling code here:
+       this.presenter.getModificarEnvioHandler().stateChanged(new ChangeEvent(this));
+    }//GEN-LAST:event_jModifEnvioActionPerformed
+
+    private void jBajaLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBajaLocActionPerformed
+        // TODO add your handling code here:
+      this.presenter.getBajaLocalidad().stateChanged(new ChangeEvent(this));
+    }//GEN-LAST:event_jBajaLocActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -489,10 +519,12 @@ public class JMainViewer extends javax.swing.JFrame {
     private javax.swing.JButton generarEnvio;
     private javax.swing.JButton impEtiq;
     private javax.swing.JMenuItem jAltaLoc;
+    private javax.swing.JMenuItem jBajaLoc;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jModifEnvio;
     private javax.swing.JButton lanRep;
     private javax.swing.JMenu mnuArchivo;
     private javax.swing.JMenu mnuCliente;

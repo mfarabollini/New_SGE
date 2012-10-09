@@ -22,5 +22,7 @@ public interface IEnvioDAO extends IDao<Integer,Envio>{
      public boolean registrarConfirmacion(Envio aEnvio,String codigoBarra);
      public Envio buscarEnvioPorFactura(String numeroFactura);
      public List<Envio> buscarEnviosCliente(Cliente aCliente);
+     public List<Envio> buscarEnviosNoConfirmados(Cliente aCliente);     
      public Envio buscarEnvioPorCodigo(Integer idEnvio);
+     public Boolean actualizarEnvio(Envio aEnvio);    
 }

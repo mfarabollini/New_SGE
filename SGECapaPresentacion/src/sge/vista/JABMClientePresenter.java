@@ -52,9 +52,6 @@ public class JABMClientePresenter {
         return localidadHandler;
     }
     
-
-
-    
     class BotonClickHandler  implements ChangeListener{
         
         @Override
@@ -108,10 +105,13 @@ public class JABMClientePresenter {
                 vista.getCboProvincia().addItem(provincia.getNombre());
             }
            aProvincia =   provinciaList.get(vista.getCboProvincia().getSelectedIndex());         
-           localidadList = aProvincia.getLocalidades();
+           localidadList = aProvincia.getLocalidades();     
+           
            for (Iterator<Localidad> it = localidadList.iterator(); it.hasNext();) {
                 Localidad localidad = it.next();
-                vista.getCboLocalidad().addItem(localidad.getNombre());
+                 if(localidad.getHabilitado().booleanValue()==true){                
+                    vista.getCboLocalidad().addItem(localidad.getNombre());
+                 }
            }
         }       
     }
@@ -128,13 +128,16 @@ public class JABMClientePresenter {
             aProvincia = provinciaList.get(vista.getCboProvincia().getSelectedIndex());
                        
             localidadList = aProvincia.getLocalidades();
+
             for (Iterator<Localidad> it = localidadList.iterator(); it.hasNext();) {
-                 Localidad localidad = it.next();
-                 vista.getCboLocalidad().addItem(localidad.getNombre());
+                 Localidad localidad = it.next();    
+                 if(localidad.getHabilitado().booleanValue()==true){                 
+                    vista.getCboLocalidad().addItem(localidad.getNombre());
+                 }
             }
         }       
     }
-    
+   
     class BuscarClienteHandler  implements ChangeListener{
         @Override
         public void stateChanged(ChangeEvent ce) {     

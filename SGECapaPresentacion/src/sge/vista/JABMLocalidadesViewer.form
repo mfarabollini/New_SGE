@@ -38,16 +38,17 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel1" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="btnGuardar" min="-2" pref="88" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="btnSalir" min="-2" pref="88" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="jPanel1" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
-              <Component id="btnGuardar" min="-2" pref="88" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="btnSalir" min="-2" pref="88" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -105,26 +106,33 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="lblLocText" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblCuit" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                          <Component id="lblCuit" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="cboProvincia" max="32767" attributes="0"/>
-                              <Group type="102" attributes="0">
-                                  <Component id="txtDscLocalidad" min="-2" pref="265" max="-2" attributes="0"/>
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
+                          <Component id="cboProvincia" min="-2" pref="265" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="lblCodPostal" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="txtCodPostal" min="-2" pref="41" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="lblCodPostal" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="txtCodPostal" min="-2" pref="41" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="lblLocText" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblLocText1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="txtDscLocalidad" pref="265" max="32767" attributes="0"/>
+                                      <Component id="cboLocalidad" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
                       </Group>
                   </Group>
                   <EmptySpace pref="32" max="32767" attributes="0"/>
@@ -139,6 +147,11 @@
                       <Component id="lblCuit" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="cboProvincia" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <EmptySpace pref="21" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="cboLocalidad" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblLocText1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblLocText" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -149,7 +162,7 @@
                       <Component id="lblCodPostal" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtCodPostal" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -160,7 +173,7 @@
             <Property name="name" type="java.lang.String" value="txtCodPostal" noResource="true"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCodPostalActionPerformed"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCodPostalKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblCodPostal">
@@ -184,8 +197,29 @@
               <StringArray count="0"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cboProvinciaItemStateChanged"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblLocText">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Localidad:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cboLocalidad">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="0"/>
+            </Property>
+            <Property name="selectedItem" type="java.lang.Object" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="&quot;Seleccione la Localidad...&quot;" type="code"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cboLocalidadActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblLocText1">
           <Properties>
             <Property name="text" type="java.lang.String" value="Localidad:"/>
           </Properties>

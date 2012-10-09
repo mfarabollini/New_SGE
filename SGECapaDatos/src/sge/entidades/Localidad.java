@@ -21,6 +21,9 @@ public class Localidad implements Serializable {
     private String nombre;
     private String codigoPostal;
     
+    //@Column(name = "habilitado")
+    private Boolean habilitado;
+    
     @ManyToOne
     private Provincia provincia;
 
@@ -38,6 +41,14 @@ public class Localidad implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Boolean getHabilitado() {
+        return habilitado;
+    }
+
+    public void setHabilitado(Boolean habilitado) {
+        this.habilitado = habilitado;
     }
 
     @Override

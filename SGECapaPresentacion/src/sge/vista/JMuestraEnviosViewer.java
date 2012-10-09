@@ -24,21 +24,23 @@ public class JMuestraEnviosViewer extends javax.swing.JDialog {
     private JMuestraEnviosPresenter presenter;
     private Integer codCliente;
     private Boolean find;
+    private String tipo;
 
     public Envio showDialog(){
         this.setVisible(true);
         return presenter.getEnvio();
     }
     
-        public JMuestraEnviosViewer(java.awt.Frame parent, boolean modal, Integer codCliente) {
+        public JMuestraEnviosViewer(java.awt.Frame parent, boolean modal, Integer codCliente, String tipo) {
         super(parent, modal);
         initComponents();
         
         this.setLocationRelativeTo(this);
-        String[] cabeceras ={"envio", "linea","Fecha envio", "Transp./Comic.","Nro. factura","Bultos","Código"};
-        boolean[] editables ={false,false,false,false,false,false,false};
+        String[] cabeceras ={"envio", "linea","Fecha envio", "Fecha Despacho", "Transp./Comic.","Nro. factura","Bultos","Código"};
+        boolean[] editables ={false,false,false,false,false,false,false,false};
         
         this.codCliente = codCliente;
+        this.tipo = tipo;
         GenericoTableModel aTableModel = new GenericoTableModel();
         aTableModel.setCabeceras(cabeceras);
         aTableModel.setEditables(editables);
@@ -61,6 +63,14 @@ public class JMuestraEnviosViewer extends javax.swing.JDialog {
                 }
             }
         });
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public Boolean getFind() {

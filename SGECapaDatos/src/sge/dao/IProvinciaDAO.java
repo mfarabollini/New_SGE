@@ -5,6 +5,7 @@
 package sge.dao;
 
 import java.util.List;
+import sge.entidades.Localidad;
 import sge.entidades.Provincia;
 
 /**
@@ -14,5 +15,5 @@ import sge.entidades.Provincia;
 public interface IProvinciaDAO extends  IDao<Integer, Provincia> {
     Provincia buscarPorCodigo(Integer codigo);
     Provincia buscarPorNombre(String nombre); 
-    List<Provincia> buscarTodas();
+    List<Provincia> buscarTodas(); 
 }

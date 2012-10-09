@@ -5,6 +5,7 @@
 package sge.entidades;
 
 import java.io.Serializable;
+import java.util.Iterator;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,8 +23,9 @@ import javax.persistence.Table;
 public class Provincia implements Serializable {
     @OneToMany(mappedBy = "provincia")
     private List<Localidad> localidades;
+    private List<Localidad> locList;
 
-    public List<Localidad> getLocalidades() {
+    public List<Localidad> getLocalidades() {    
         return localidades;
     }
 

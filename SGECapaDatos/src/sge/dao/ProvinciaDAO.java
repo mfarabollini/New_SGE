@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.Query;
 import org.eclipse.persistence.config.HintValues;
 import org.eclipse.persistence.config.QueryHints;
+import sge.entidades.Localidad;
 import sge.entidades.Provincia;
 import sge.exception.ConectividadException;
 

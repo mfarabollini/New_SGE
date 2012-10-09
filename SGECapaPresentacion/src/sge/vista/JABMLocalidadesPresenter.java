@@ -29,6 +29,7 @@ public class JABMLocalidadesPresenter {
     private JABMLocalidadesViewer vista;
     private GuardarLocalidadHandler guardarLocalidad = new GuardarLocalidadHandler();
     private BuscarProvinciaHandler provinciaHandler = new BuscarProvinciaHandler();
+    private BuscarLocalidadHandler localidadHandler = new BuscarLocalidadHandler();    
 
     public BuscarProvinciaHandler getProvinciaHandler() {
         return provinciaHandler;
@@ -36,6 +37,10 @@ public class JABMLocalidadesPresenter {
     
     public GuardarLocalidadHandler getGuardarLocalidad() {
         return guardarLocalidad;
+    }
+
+    public BuscarLocalidadHandler getLocalidadHandler() {
+        return localidadHandler;
     }
     
     class GuardarLocalidadHandler  implements ChangeListener{
@@ -45,7 +50,11 @@ public class JABMLocalidadesPresenter {
             boolean resultado = false;
             Integer modo = vista.getModo();
           
-            resultado =crearLocalidad();
+            if(modo==1){
+                resultado =crearLocalidad();
+            }else if(modo==3){
+                resultado =borrarLocalidad();
+            }
             if(resultado){
                 ///Limpio los campos de texto
                 vista.getTxtCodPostal().setText("");
@@ -67,6 +76,7 @@ public class JABMLocalidadesPresenter {
             Provincia aProvincia=null;
             aLocalidad.setCodigoPostal(vista.getTxtCodPostal().getText().trim()); 
             aLocalidad.setNombre(vista.getTxtDscLocalidad().getText().trim());
+            aLocalidad.setHabilitado(true);
             aProvincia = provinciaList.get(vista.getCboProvincia().getSelectedIndex());
             aLocalidad.setProvincia(aProvincia);  
             
@@ -82,6 +92,30 @@ public class JABMLocalidadesPresenter {
         
             return resultado;
         }
+        
+        private boolean borrarLocalidad() {
+            boolean resultado = false;
+            Provincia aProvincia = null;
+            
+            aProvincia = provinciaList.get(vista.getCboProvincia().getSelectedIndex());
+            
+            for (Iterator<Localidad> it = aProvincia.getLocalidades().iterator(); it.hasNext();) {
+                aLocalidad = it.next(); 
+////aca esta el problema1!
+            }
+                    
+                    
+            aLocalidad=aProvincia.getLocalidades().get(vista.getCboLocalidad().getSelectedIndex());
+            
+            aLocalidad.setHabilitado(false);
+            try {
+                resultado = GestionEnvioServicios.actualizarLocalidad(aLocalidad);
+            } catch (ConectividadException ex) {
+                notificarException(ex);
+            }
+            return resultado;
+       }
+
 
      }
      
@@ -91,8 +125,7 @@ public class JABMLocalidadesPresenter {
         public void stateChanged(ChangeEvent ce) { 
             Provincia aProvincia=null;
             List<Localidad> localidadList=null;
-            Localidad aLocal = null;
-
+            
             try {
                 provinciaList = GestionEnvioServicios.buscarProvincia();
             } catch (ConectividadException ex) {
@@ -102,10 +135,40 @@ public class JABMLocalidadesPresenter {
                 Provincia provincia = it.next();             
                 vista.getCboProvincia().addItem(provincia.getNombre());
             }
+           aProvincia =   provinciaList.get(vista.getCboProvincia().getSelectedIndex());         
+            localidadList = aProvincia.getLocalidades();
+
+           for (Iterator<Localidad> it = localidadList.iterator(); it.hasNext();) {
+                Localidad localidad = it.next(); 
+                if(localidad.getHabilitado().booleanValue()==true){                
+                    vista.getCboLocalidad().addItem(localidad.getNombre());
+                }
+           }
        
         }     
      }
- 
+    
+    class BuscarLocalidadHandler  implements ChangeListener{
+        
+        @Override
+        public void stateChanged(ChangeEvent ce) { 
+            List<Localidad> localidadList=null;
+            Provincia aProvincia = null;
+            
+            vista.getCboLocalidad().removeAllItems();
+           
+            aProvincia = provinciaList.get(vista.getCboProvincia().getSelectedIndex());
+                       
+            localidadList = aProvincia.getLocalidades();
+           
+            for (Iterator<Localidad> it = localidadList.iterator(); it.hasNext();) {
+                 Localidad localidad = it.next();
+                 if(localidad.getHabilitado().booleanValue()==true){
+                    vista.getCboLocalidad().addItem(localidad.getNombre());
+                 }
+            }
+        }       
+    }
     
      private void notificarException(Exception ex){
             vista.notificarException(ex);

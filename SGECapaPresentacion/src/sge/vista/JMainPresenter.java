@@ -21,6 +21,7 @@ import sge.servicio.GestionEnvioServicios;
 public class JMainPresenter {
     private JMainViewer vista;
     private GenerarEnvíoHandler generarEnvioHandler = new GenerarEnvíoHandler();
+    private ModificarEnvíoHandler modificarEnvioHandler = new ModificarEnvíoHandler();    
     private ImprimirEtiquetasHandler imprimirEtiquetasHanlder = new ImprimirEtiquetasHandler();
     private SalidaEnvioHandler RegistroSalidaEnvioHandler = new SalidaEnvioHandler();
     private AltaClienteHandler altaClienteHandler = new AltaClienteHandler();
@@ -34,9 +35,13 @@ public class JMainPresenter {
     private VerTransporteHandler verTransporteHandler = new VerTransporteHandler();
     private LanzarReportesHandler lanzarReportesHandler = new LanzarReportesHandler();
     private AltaLocalidadHandler altaLocalidad = new AltaLocalidadHandler();
+    private BajaLocalidadHandler bajaLocalidad = new BajaLocalidadHandler();    
 
     public AltaLocalidadHandler getAltaLocalidad() {
         return altaLocalidad;
+    }
+    public BajaLocalidadHandler getBajaLocalidad() {
+        return bajaLocalidad;
     }
     
     public ConfirmacionEnvioHandler getConfirmacionEnvioHandler() {
@@ -60,6 +65,10 @@ public class JMainPresenter {
     public GenerarEnvíoHandler getGenerarEnvioHandler() {
         return generarEnvioHandler;
     }
+    
+    public ModificarEnvíoHandler getModificarEnvioHandler() {
+        return modificarEnvioHandler;
+    }    
 
     public ImprimirEtiquetasHandler getImprimirEtiquetasHanlder() {
         return imprimirEtiquetasHanlder;
@@ -123,6 +132,20 @@ public class JMainPresenter {
         }
          
      }
+    
+     class ModificarEnvíoHandler  implements ChangeListener{
+        @Override
+        public void stateChanged(ChangeEvent ce) {
+            if(ventanaAbierta("MODENV")){
+                return;
+            }
+            JModificarEnvioViewer form = new JModificarEnvioViewer();
+            //vista.getPanelEscritorio().add("GENENV",form);
+            vista.getPanelEscritorio().add( form, this, 1);
+            form.setVisible(true);
+        }
+     }
+        
     class ImprimirEtiquetasHandler  implements ChangeListener{
         @Override
         public void stateChanged(ChangeEvent ce) {
@@ -275,6 +298,19 @@ public class JMainPresenter {
             }
             JABMLocalidadesViewer form = new JABMLocalidadesViewer(1);
             form.setName(form.getName()+"1");
+            vista.getPanelEscritorio().add(form);
+            form.setVisible(true);
+        }
+     }
+     
+     class BajaLocalidadHandler  implements ChangeListener{
+        @Override
+        public void stateChanged(ChangeEvent ce) {
+            if(ventanaAbierta("ABMLOC3")){
+                return;
+            }
+            JABMLocalidadesViewer form = new JABMLocalidadesViewer(3);
+            form.setName(form.getName()+"3");
             vista.getPanelEscritorio().add(form);
             form.setVisible(true);
         }

@@ -277,11 +277,6 @@ public class JABMClienteViewer extends javax.swing.JInternalFrame {
                 cboProvinciaItemStateChanged(evt);
             }
         });
-        cboProvincia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cboProvinciaActionPerformed(evt);
-            }
-        });
 
         cboLocalidad.setSelectedItem("Seleccione la Localidad...");
 
@@ -494,10 +489,6 @@ public class JABMClienteViewer extends javax.swing.JInternalFrame {
         // TODO add your handling code here:         presenter.getPres().stateChanged(new ChangeEvent(this));     }//GEN-LAST:event_btnGuardarActionPerformed
 
         // TODO add your handling code here:         presenter.getClienteHandler().stateChanged(new ChangeEvent(this));     }                                              
-
-    private void cboProvinciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboProvinciaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cboProvinciaActionPerformed
 
         // TODO add your handling code here:         presenter.getClienteHandler().stateChanged(new ChangeEvent(this));     }                                              
 

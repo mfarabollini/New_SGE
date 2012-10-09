@@ -96,6 +96,12 @@ public class  GestionEnvioServicios {
         return resultado;
     }
     
+    public static boolean guardarEnvioModif(Envio aEnvio) throws Exception{        
+        IEnvioDAO enviosDao = new EnvioDAO();
+        enviosDao.actualizarEnvio(aEnvio);
+        return true;
+    }
+    
     public static List<Envio> buscarEnvio(Date fechaEnvio,Cliente aCliente) throws ConectividadException{
         List<Envio> enviosList = null;
         IEnvioDAO enviosDao = new EnvioDAO();
@@ -196,6 +202,13 @@ public class  GestionEnvioServicios {
         aEnvio = enviosDao.buscarEnviosCliente(aCliente);
         return aEnvio;
     }
+    
+    public static List<Envio> buscarEnviosNoConfirmados(Cliente aCliente) throws ConectividadException{  
+        List<Envio> aEnvio = null;
+        IEnvioDAO enviosDao = new EnvioDAO();        
+        aEnvio = enviosDao.buscarEnviosNoConfirmados(aCliente);
+        return aEnvio;
+    }    
     public static boolean registrarConfirmacion(Envio aEnvio,String codigoBarra) throws ConectividadException{
         IEnvioDAO enviosDao = new EnvioDAO();        
         return enviosDao.registrarConfirmacion(aEnvio,codigoBarra);
@@ -281,14 +294,11 @@ public class  GestionEnvioServicios {
         //}
         return resultado;
     }
-    public static boolean eliminarLocalidad(Localidad aLocalidad) throws ConectividadException{        
-        boolean resultado = false;
-        Localidad aLoc = null;
+    public static boolean actualizarLocalidad(Localidad aLocalidad) throws ConectividadException{        
+
         ILocalidadDAO localidadDAO = new LocalidadDAO();
-        aLoc = localidadDAO.buscarLocalidadPorCodigo(aLocalidad.getId());
-        
-        localidadDAO.remove(aLoc);
-        resultado = true;
-        return resultado;
+        return localidadDAO.actualizarLocalidad(aLocalidad);
+
     }
+    
 }

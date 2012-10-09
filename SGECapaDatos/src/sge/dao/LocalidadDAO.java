@@ -11,6 +11,7 @@ import org.eclipse.persistence.config.HintValues;
 import org.eclipse.persistence.config.QueryHints;
 import sge.entidades.Envio;
 import sge.entidades.Localidad;
+import sge.entidades.Provincia;
 import sge.exception.ConectividadException;
 
 /**
@@ -26,5 +27,32 @@ public class LocalidadDAO extends DaoImp<Integer, Localidad> implements ILocalid
     public Localidad buscarLocalidadPorCodigo(Integer idLocalidad) {
        return findById(idLocalidad);
     }   
+    
+    @Override
+    public Boolean actualizarLocalidad(Localidad aLocalidad) {
+        
+        Localidad localidadLoc = null;
+        entityManager.getTransaction().begin();
+        try {
+
+           localidadLoc = entityManager.find(Localidad.class, aLocalidad.getId());
+
+           localidadLoc.setHabilitado(aLocalidad.getHabilitado());
+           localidadLoc.setCodigoPostal(aLocalidad.getCodigoPostal());
+           localidadLoc.setNombre(aLocalidad.getNombre());
+           
+           entityManager.getTransaction().commit();
+           return true;
+      } catch (Exception e) {
+           e.printStackTrace();
+           entityManager.getTransaction().rollback();
+           return false;
+       } finally {
+           entityManager.close();
+           
+       }
+        
+    }
+    
 
 }

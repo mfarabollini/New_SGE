@@ -31,6 +31,11 @@ public class JABMLocalidadesViewer extends javax.swing.JInternalFrame {
         if (modo == 1) {
             this.setTitle("Alta Localidad");
             btnGuardar.setText("Guardar"); 
+        }else if (modo == 3) {
+            this.setTitle("Baja Localidad");
+            txtDscLocalidad.setVisible(false);
+            lblLocText.setVisible(false);
+            btnGuardar.setText("Borrar"); 
         }
         
         //Redimensiona la ventana
@@ -78,6 +83,14 @@ public class JABMLocalidadesViewer extends javax.swing.JInternalFrame {
         this.modo = modo;
     }
 
+    public JComboBox getCboLocalidad() {
+        return cboLocalidad;
+    }
+
+    public void setCboLocalidad(JComboBox cboLocalidad) {
+        this.cboLocalidad = cboLocalidad;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -97,6 +110,8 @@ public class JABMLocalidadesViewer extends javax.swing.JInternalFrame {
         txtDscLocalidad = new javax.swing.JTextField();
         cboProvincia = new javax.swing.JComboBox();
         lblLocText = new javax.swing.JLabel();
+        cboLocalidad = new javax.swing.JComboBox();
+        lblLocText1 = new javax.swing.JLabel();
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -125,9 +140,9 @@ public class JABMLocalidadesViewer extends javax.swing.JInternalFrame {
         jPanel1.setMinimumSize(new java.awt.Dimension(398, 140));
 
         txtCodPostal.setName("txtCodPostal"); // NOI18N
-        txtCodPostal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCodPostalActionPerformed(evt);
+        txtCodPostal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCodPostalKeyTyped(evt);
             }
         });
 
@@ -137,7 +152,22 @@ public class JABMLocalidadesViewer extends javax.swing.JInternalFrame {
 
         txtDscLocalidad.setName("txtRazonSocial"); // NOI18N
 
+        cboProvincia.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cboProvinciaItemStateChanged(evt);
+            }
+        });
+
         lblLocText.setText("Localidad:");
+
+        cboLocalidad.setSelectedItem("Seleccione la Localidad...");
+        cboLocalidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboLocalidadActionPerformed(evt);
+            }
+        });
+
+        lblLocText1.setText("Localidad:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -146,21 +176,26 @@ public class JABMLocalidadesViewer extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblLocText)
-                            .addComponent(lblCuit))
+                        .addGap(32, 32, 32)
+                        .addComponent(lblCuit)
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cboProvincia, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtDscLocalidad, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                        .addComponent(cboProvincia, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(lblCodPostal)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtCodPostal, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblCodPostal)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtCodPostal, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblLocText)
+                                    .addComponent(lblLocText1))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtDscLocalidad, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
+                                    .addComponent(cboLocalidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -170,6 +205,10 @@ public class JABMLocalidadesViewer extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCuit)
                     .addComponent(cboProvincia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cboLocalidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblLocText1))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLocText)
@@ -178,7 +217,7 @@ public class JABMLocalidadesViewer extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCodPostal)
                     .addComponent(txtCodPostal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -187,13 +226,13 @@ public class JABMLocalidadesViewer extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,22 +278,36 @@ private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
                 presenter.getGuardarLocalidad().stateChanged(new ChangeEvent(this));
             }
         
-        
 }//GEN-LAST:event_btnGuardarActionPerformed
 
-    private void txtCodPostalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodPostalActionPerformed
+    private void txtCodPostalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodPostalKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtCodPostalActionPerformed
+        if(txtCodPostal.getText().trim().length() > 3 ){
+            evt.consume();  // ignorar el evento de teclado
+            this.btnGuardar.requestFocus();
+        }
+    }//GEN-LAST:event_txtCodPostalKeyTyped
+
+    private void cboProvinciaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboProvinciaItemStateChanged
+        // TODO add your handling code here:
+        presenter.getLocalidadHandler().stateChanged(new ChangeEvent(this));        
+    }//GEN-LAST:event_cboProvinciaItemStateChanged
+
+    private void cboLocalidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLocalidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboLocalidadActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JComboBox cboLocalidad;
     private javax.swing.JComboBox cboProvincia;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblCodPostal;
     private javax.swing.JLabel lblCuit;
     private javax.swing.JLabel lblLocText;
+    private javax.swing.JLabel lblLocText1;
     private javax.swing.JTextField txtCodPostal;
     private javax.swing.JTextField txtDscLocalidad;
     // End of variables declaration//GEN-END:variables

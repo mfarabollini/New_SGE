@@ -57,14 +57,24 @@ class BuscarEnvioHandler implements ChangeListener{
         @Override
         public void stateChanged(ChangeEvent e) {
             List<Envio> envios = null;
-            
-            try {
-                aCliente = GestionEnvioServicios.buscarClientePorCodigo(vista.getCodCliente(),false);
-                envios = GestionEnvioServicios.buscarEnviosCliente(aCliente);
-                
-            } catch (ConectividadException ex) {
-                 vista.notificarMensaje(ex.getMensaje(),JOptionPane.ERROR_MESSAGE);
-            }          
+            if(vista.getTipo()=="NC"){
+                try {
+                    aCliente = GestionEnvioServicios.buscarClientePorCodigo(vista.getCodCliente(),false);
+                    envios = GestionEnvioServicios.buscarEnviosNoConfirmados(aCliente);
+
+
+                } catch (ConectividadException ex) {
+                    vista.notificarMensaje(ex.getMensaje(),JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                try {
+                    aCliente = GestionEnvioServicios.buscarClientePorCodigo(vista.getCodCliente(),false);
+                    envios = GestionEnvioServicios.buscarEnviosCliente(aCliente);
+                } catch (ConectividadException ex) {
+                    vista.notificarMensaje(ex.getMensaje(),JOptionPane.ERROR_MESSAGE);
+                }
+                   
+            }
             
             if(envios.isEmpty()){
                 vista.setFind(false);
@@ -84,17 +94,36 @@ class BuscarEnvioHandler implements ChangeListener{
                     List<LineaEnvio>lineas = aEnvio.getLineaEnvioList();
                     for(int i=0; i<lineas.size();i++){              
                         if(lineas.get(i).getCliente().equals(aCliente)){
-                            if((lineas.get(i).getFechaEntrega()==null)&&
-                                (aEnvio.getFechaSalida()!=null)){
-                                aItem = new HashMap();
-                                aItem.put("0", aEnvio.getIdenvio());
-                                aItem.put("1", lineas.get(i).getId());  
-                                aItem.put("2", formatea.format(aEnvio.getFechaCreacion()));
-                                aItem.put("3", aEnvio.getIdmedio().getRazonSocial());
-                                aItem.put("4", lineas.get(i).getNroFactura());
-                                aItem.put("5", lineas.get(i).getCantBultos());
-                                aItem.put("6", lineas.get(i).getCodigoDeBarra()+lineas.get(i).getDigitoVerificador());                        
-                                aModel.agregarLinea(aItem);
+                            if (vista.getTipo().equals("")) {
+                                if((lineas.get(i).getFechaEntrega()==null)&&
+                                    (aEnvio.getFechaSalida()!=null)){
+                                    aItem = new HashMap();
+                                    aItem.put("0", aEnvio.getIdenvio());
+                                    aItem.put("1", lineas.get(i).getId());  
+                                    aItem.put("2", formatea.format(aEnvio.getFechaCreacion()));
+                                    aItem.put("3", aEnvio.getIdmedio().getRazonSocial());
+                                    aItem.put("4", lineas.get(i).getNroFactura());
+                                    aItem.put("5", lineas.get(i).getCantBultos());
+                                    aItem.put("6", lineas.get(i).getCodigoDeBarra()+lineas.get(i).getDigitoVerificador());                        
+                                    aModel.agregarLinea(aItem);
+                                }
+                            }else{
+                                 if(lineas.get(i).getFechaEntrega()==null){
+                                    aItem = new HashMap();
+                                    aItem.put("0", aEnvio.getIdenvio());
+                                    aItem.put("1", lineas.get(i).getId());  
+                                    aItem.put("2", formatea.format(aEnvio.getFechaCreacion()));
+                                    if(aEnvio.getFechaSalida()==null){
+                                        aItem.put("3", "");
+                                    }else{
+                                        aItem.put("3", formatea.format(aEnvio.getFechaSalida()));                                    
+                                    }                                    
+                                    aItem.put("4", aEnvio.getIdmedio().getRazonSocial());
+                                    aItem.put("5", lineas.get(i).getNroFactura());
+                                    aItem.put("6", lineas.get(i).getCantBultos());
+                                    aItem.put("7", lineas.get(i).getCodigoDeBarra()+lineas.get(i).getDigitoVerificador());                        
+                                    aModel.agregarLinea(aItem);
+                                }
                             }
                         }else{
                             lineas.remove(i);

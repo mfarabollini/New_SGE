@@ -38,7 +38,7 @@ public class JABMClienteViewer extends javax.swing.JInternalFrame {
         }else if (modo == 2) {    
             this.setTitle("Modificar Cliente");
             btnGuardar.setText("Modificar");   
-            txtId.setEnabled(false);
+            //txtId.setEnabled(false);
         }else if (modo == 3) {
             this.setTitle("Baja Cliente");
             btnGuardar.setText("Borrar");

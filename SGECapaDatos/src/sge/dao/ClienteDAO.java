@@ -79,6 +79,7 @@ public class ClienteDAO extends DaoImp<Integer, Cliente> implements IClienteDAO 
            cliLocal.setTelefonoAlternativo( aCliente.getTelefonoAlternativo());
            cliLocal.setEmail( aCliente.getEmail());
            cliLocal.setLocalidad( aCliente.getLocalidad());
+           cliLocal.setNroCliente( aCliente.getNroCliente());
            cliLocal.setHabilitado( aCliente.getHabilitado());
            
            entityManager.getTransaction().commit();

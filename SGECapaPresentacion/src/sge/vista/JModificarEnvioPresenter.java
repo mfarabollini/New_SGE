@@ -19,7 +19,6 @@ import sge.entidades.MedioEnvio;
 import sge.entidades.Parametro;
 import sge.exception.ConectividadException;
 import sge.servicio.GestionEnvioServicios;
-import sun.org.mozilla.javascript.internal.ast.CatchClause;
 
 /**
  *
@@ -37,7 +36,7 @@ public class JModificarEnvioPresenter {
     private ClienteChangeHandler handlerCliente = new ClienteChangeHandler();    
     private GuardarHandler guardarHandler = new GuardarHandler();
     private BuscarEnvioHandler buscarEnvioHandler = new BuscarEnvioHandler();
-    
+    private BorrarHandler borrarHandler = new BorrarHandler();
     
     public JModificarEnvioPresenter(JModificarEnvioViewer vista) {
         aEnvio = new Envio();
@@ -68,6 +67,10 @@ public class JModificarEnvioPresenter {
 
     public GuardarHandler getGuardarHandler() {
         return guardarHandler;
+    }
+
+    public BorrarHandler getBorrarHandler() {
+        return borrarHandler;
     }
 
 
@@ -320,6 +323,43 @@ public class JModificarEnvioPresenter {
         }    
     }
    
+   public class BorrarHandler implements ChangeListener{
+
+        @Override
+        public void stateChanged(ChangeEvent ce) {
+            boolean resultado=true;
+                     
+            aEnvio.se; 
+                
+            
+            Map item = new HashMap();
+            item.put("CLI", aCliente);
+            item.put("FAC", vista.getTxtNroFactura().getText().trim());
+            item.put("BUL", vista.getTxtCantBultos().getText().trim());
+                        
+            lineasDeEnvioMap.add(item);
+
+            if(aMedio==null){
+                aMedio = aEnvio.getIdmedio();
+            }
+            aEnvio.setIdmedio(aMedio);
+            aEnvio.getLineaEnvioList().clear();
+ 
+            for (Iterator it = lineasDeEnvioMap.iterator(); it.hasNext();) {
+                Map aItem = (Map) it.next();                
+                aEnvio.agregarLinea(aItem);
+            }        
+            
+            try {
+                GestionEnvioServicios.guardarEnvioModif(aEnvio);
+            } catch (Exception ex) {
+                notificarException (ex);
+            }
+            reinciciarTransaccion();
+            vista.notificarEnvio(resultado);
+        }    
+    }
+   
    private void notificarException(Exception ex){
        vista.notificarException(ex);
    }
@@ -334,7 +374,7 @@ public class JModificarEnvioPresenter {
         }catch(ConectividadException ex){
             notificarException (ex);
         }        
-        if(aEnvioLoc != null && !permite && aEnvioLoc.getIdenvio()!=nroEnvio){
+        if(aEnvioLoc != null && !permite && aEnvioLoc.getIdenvio().intValue()!=nroEnvio.intValue())          {
             for (Iterator it = aEnvioLoc.getLineaEnvioList().iterator(); it.hasNext();) {
                 LineaEnvio linea = (LineaEnvio) it.next();
                 if(linea.getNroFactura().equals(vista.getTxtNroFactura().getText().trim())){

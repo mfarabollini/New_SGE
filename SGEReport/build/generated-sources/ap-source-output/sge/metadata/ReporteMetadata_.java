@@ -7,7 +7,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 import sge.metadata.Grupo;
 import sge.metadata.ParamReporte;
 
-@Generated(value="EclipseLink-2.3.0.v20110604-r9504", date="2012-10-15T19:42:32")
+@Generated(value="EclipseLink-2.3.0.v20110604-r9504", date="2012-10-26T11:41:29")
 @StaticMetamodel(ReporteMetadata.class)
 public class ReporteMetadata_ { 
 

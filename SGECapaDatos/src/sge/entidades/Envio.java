@@ -53,6 +53,10 @@ public class Envio implements Serializable {
     @ManyToOne()
     private MedioEnvio medio;
     
+    //@Column(name = "habilitado")
+    private Boolean habilitado;
+    
+    
     @OneToMany(mappedBy = "envio", cascade= CascadeType.ALL)
     private List<LineaEnvio> lineaEnvioList;
 
@@ -107,6 +111,14 @@ public class Envio implements Serializable {
 
     public void setLineaEnvioList(List<LineaEnvio> lineaEnvioList) {
         this.lineaEnvioList = lineaEnvioList;
+    }
+
+    public Boolean getHabilitado() {
+        return habilitado;
+    }
+
+    public void setHabilitado(Boolean habilitado) {
+        this.habilitado = habilitado;
     }
 
     @Override

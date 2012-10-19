@@ -5,7 +5,7 @@ import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 import sge.entidades.Provincia;
 
-@Generated(value="EclipseLink-2.3.0.v20110604-r9504", date="2012-10-15T19:42:30")
+@Generated(value="EclipseLink-2.3.0.v20110604-r9504", date="2012-10-26T11:41:41")
 @StaticMetamodel(Localidad.class)
 public class Localidad_ { 
 

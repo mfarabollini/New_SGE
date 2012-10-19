@@ -47,7 +47,7 @@ public class EnvioDAO extends DaoImp<Integer, Envio> implements IEnvioDAO  {
         q = entityManager.createQuery(            
         "SELECT  e FROM " + entityClass.getSimpleName()  +
                  " e JOIN e.lineaEnvioList l "
-                 + " WHERE (e.fechaCreacion BETWEEN :fechaMin AND :fechaMax)AND (l.cliente =:cliente  )");
+                 + " WHERE (e.fechaCreacion BETWEEN :fechaMin AND :fechaMax) AND (l.cliente =:cliente ) AND (e.habilitado = true) ");
         q.setParameter("fechaMin",fechaMin );       
         q.setParameter("fechaMax",fechaMax );      
         q.setParameter("cliente",aCliente );
@@ -68,6 +68,7 @@ public class EnvioDAO extends DaoImp<Integer, Envio> implements IEnvioDAO  {
        "SELECT e FROM " + entityClass.getSimpleName()  +
                  " e JOIN e.lineaEnvioList l "
                  + " WHERE e.fechaSalida is not null and "
+                +  "       e.habilitado = true and"
                  + "       l.fechaEntrega is null and l.cliente =:cliente " );
         q.setParameter("cliente",aCliente );  
         q.setHint(QueryHints.REFRESH, HintValues.TRUE);
@@ -82,8 +83,8 @@ public class EnvioDAO extends DaoImp<Integer, Envio> implements IEnvioDAO  {
         
         q = entityManager.createQuery(            
        "SELECT e FROM " + entityClass.getSimpleName()  +
-                 " e JOIN e.lineaEnvioList l "
-                 + " WHERE l.fechaEntrega is null and l.cliente =:cliente " );
+                 " e JOIN e.lineaEnvioList l"
+                 + " WHERE l.fechaEntrega is null and e.habilitado = true and l.cliente =:cliente " );
         q.setParameter("cliente",aCliente );  
         q.setHint(QueryHints.REFRESH, HintValues.TRUE);
 
@@ -108,7 +109,7 @@ public class EnvioDAO extends DaoImp<Integer, Envio> implements IEnvioDAO  {
         
         q = entityManager.createQuery(            
         "SELECT  e FROM " + entityClass.getSimpleName()  +
-                 " e  JOIN e.lineaEnvioList l  WHERE e.fechaCreacion BETWEEN :fechaMin AND :fechaMax");
+                 " e  JOIN e.lineaEnvioList l  WHERE e.fechaCreacion BETWEEN :fechaMin AND :fechaMax and e.habilitado = true");
         q.setParameter("fechaMin",fechaMin );       
         q.setParameter("fechaMax",fechaMax );     
         q.setHint(QueryHints.REFRESH, HintValues.TRUE);
@@ -123,7 +124,7 @@ public class EnvioDAO extends DaoImp<Integer, Envio> implements IEnvioDAO  {
        q = entityManager.createQuery(            
        "SELECT  e FROM " + entityClass.getSimpleName()  +
                  " e JOIN e.lineaEnvioList l "
-                 + " WHERE l.codigoDeBarra =:codigoBarra");
+                 + " WHERE l.codigoDeBarra =:codigoBarra and e.habilitado = true");
         q.setParameter("codigoBarra",codigo ); 
         q.setHint(QueryHints.REFRESH, HintValues.TRUE);
         try{
@@ -178,7 +179,7 @@ public class EnvioDAO extends DaoImp<Integer, Envio> implements IEnvioDAO  {
         q = entityManager.createQuery(            
         "SELECT  e FROM " + entityClass.getSimpleName()  +
                  " e JOIN e.lineaEnvioList l "
-                 + " WHERE l.nroGuiaTransporte =:nroGuia");
+                 + " WHERE l.nroGuiaTransporte =:nroGuia and e.habilitado = true");
         q.setParameter("nroGuia",codigo );    
         q.setHint(QueryHints.REFRESH, HintValues.TRUE);
         
@@ -256,7 +257,7 @@ public class EnvioDAO extends DaoImp<Integer, Envio> implements IEnvioDAO  {
        q = entityManager.createQuery(            
        "SELECT  e FROM " + entityClass.getSimpleName()  +
                  " e JOIN e.lineaEnvioList l "
-                 + " WHERE l.nroFactura =:pNroFactura");
+                 + " WHERE l.nroFactura =:pNroFactura and e.habilitado = true");
         q.setParameter("pNroFactura",numeroFactura ); 
         q.setHint(QueryHints.REFRESH, HintValues.TRUE);
         try{
@@ -281,6 +282,7 @@ public class EnvioDAO extends DaoImp<Integer, Envio> implements IEnvioDAO  {
            aEnvioLocal = entityManager.find(Envio.class, aEnvio.getIdenvio());
            aEnvioLocal.setFechaCreacion(aEnvio.getFechaCreacion());
            aEnvioLocal.setFechaSalida(aEnvio.getFechaSalida());
+           aEnvioLocal.setHabilitado(aEnvio.getHabilitado());
            
            MedioLocal = aEnvio.getIdmedio();
            entityManager.merge(MedioLocal);

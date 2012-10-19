@@ -173,7 +173,7 @@ public class JGenerarEnvioPresenter {
         @Override
         public void stateChanged(ChangeEvent ce) { 
             
-            if(existeNumeroFactura(vista.getTxtNroFactura().getText().trim())){
+                if(existeNumeroFactura(vista.getTxtNroFactura().getText().trim())){
                 return;
             }
             Map item = new HashMap();
@@ -219,6 +219,7 @@ public class JGenerarEnvioPresenter {
             
             aEnvio.setFechaCreacion(GregorianCalendar.getInstance().getTime());
             aEnvio.setIdmedio(aMedio);
+            aEnvio.setHabilitado(true);
             for (Iterator it = lineasDeEnvioMap.iterator(); it.hasNext();) {
                 Map aItem = (Map) it.next();                
                 aEnvio.agregarLinea(aItem);

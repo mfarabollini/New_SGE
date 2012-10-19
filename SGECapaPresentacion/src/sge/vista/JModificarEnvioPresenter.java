@@ -328,10 +328,13 @@ public class JModificarEnvioPresenter {
         @Override
         public void stateChanged(ChangeEvent ce) {
             boolean resultado=true;
-                     
-            aEnvio.se; 
-                
             
+            if (vista.preguntar("Esta seguro que desea borrar el envío?", JOptionPane.YES_NO_OPTION)==0) {
+                aEnvio.setHabilitado(false); 
+            }else{
+                return;
+            }                     
+
             Map item = new HashMap();
             item.put("CLI", aCliente);
             item.put("FAC", vista.getTxtNroFactura().getText().trim());
